@@ -1,6 +1,6 @@
-// /api/ai.js — Vercel Serverless Function
-export default async function handler(req, res) {
-  // CORS for Webflow embeds
+// /api/ai.js — Vercel Serverless Function (CommonJS)
+module.exports = async (req, res) => {
+  // CORS (så Webflow kan kalde endpointet)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -31,10 +31,10 @@ export default async function handler(req, res) {
     const data = await r.json();
     if (!r.ok) return res.status(r.status).json(data);
 
-    const text = data.choices?.[0]?.message?.content ?? '';
+    const text = data.choices?.[0]?.message?.content || '';
     return res.status(200).json({ reply: text });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Server error' });
   }
-}
+};
