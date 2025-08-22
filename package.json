@@ -1,5 +1,4 @@
 {
   "name": "webflow-ai-proxy",
-  "private": true,
-  "type": "module"
+  "private": true
 }
